@@ -51,7 +51,7 @@ func TestWithMask(t *testing.T) {
 type FullTestStruct struct {
 	ID     string `sxm:"-"`
 	Name   string `sxm:"name,omitempty,mask"`
-	Title  string `sxm:"title"`
+	Title  string `sxm:"title,omitempty"`
 	Author string `sxm:"author,mask"`
 	Pages  int    `sxm:"pages,omitempty"`
 }

@@ -15,7 +15,12 @@ type FieldRule func(value any, key string, opts ...string) bool
 func WithOmit() FieldRule {
 	return func(value any, key string, opts ...string) bool {
 		if doesContain("omitempty", opts...) {
-			if reflect.ValueOf(value).IsZero() || reflect.ValueOf(value).IsNil() {
+			if reflect.ValueOf(value).Kind() == reflect.Pointer {
+				if reflect.ValueOf(value).IsNil() {
+					return false
+				}
+			}
+			if reflect.ValueOf(value).IsZero() {
 				return false
 			}
 		}
